@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <head>
+            <title>YPA PROTOTYPE - PORTAL</title>
+            <link rel="stylesheet" type="text/css" href="style.css" media=”screen” />
+        </head>
+        <body>
+            <div id="IDContainer" class="centerHnV">
+                <h1 id="IDTitle">ID</h1>
+                <p id="IDUsernameLable" class="IDFieldLabel">USERNAME</p>
+                <input type="search" id="IDUsernameInputField">
+                <p id="IDPasswordLable" class="IDFieldLabel">PASSWORD</p>
+                <input type="search" id="IDPasswordInputField">
+            </div>
+        </body>
+    </body>
+</html>
+
+<style>
+    *{margin:0;padding:0;}
+
+    #IDContainer {
+        padding: 30px 20px 0 10px;
+        width: 50%;
+        height: 20%;
+        border: 3px solid black;
+        
+    }
+
+    #IDTitle {
+        text-align: right;
+    }
+
+    .IDFieldLabel {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    #IDContainer > input {
+        width: 100%;
+        margin: 3px;
+        padding: 2px 0;
+    }
+
+    .centerHnV {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .centerH {
+        position: absolute;
+        left: 50%;
+        transform: translate(0, -50%);
+    }
+
+    .centerV {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, 0);
+    }
+</style>
