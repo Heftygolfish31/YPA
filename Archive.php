@@ -25,7 +25,7 @@
     <body>
         <div id="ArchiveSearchContainer">
             <form id="ArchiveSearchForm" method="POST" action="" accept-charset="utf-8">
-                <input type="text" name="archivesearchvalue" class="search" placeholder="Search Archive Contents">
+                <input type="text" name="ArchiveSearchValue" class="search" placeholder="Search Archive Contents">
                 <input type="submit" value="Search">
             </form>
         </div>
@@ -33,15 +33,15 @@
             
             <table>
                 <tr>
-                    <th id="IconHeader">ICON</th>
+                    <th id="IDHeader">ID</th>
                     <th id="TitleHeader">TITLE</th>
-                    <th id="DateHeader">DATE ADDED</th>
                     <th id="OrgHeader">ORGANISATION</th>
-                    <th id="SerialNumHeader">SERIAL NUMBER</th>
+                    <th id="DateHeader">DATE ADDED</th>
+                    <th id="IconHeader">ICON</th>
                 </tr>
 
                 <?php
-                    $sql = 'SELECT * FROM ypatbltst1';
+                    $sql = 'SELECT * FROM ypatbltst2';
                     mysqli_select_db($conn, 'ypadb1');
                     $retval = mysqli_query( $conn, $sql);
                     
@@ -53,11 +53,11 @@
 
                 <?php while($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {?>
                 <tr>
-                    <td><?php echo "{$row['SearchedFor']}";?></td>
-                    <td>TITLE SHORT HERE</td>
-                    <td>DD/MM/YYYY HERE</td>
-                    <td>ACRONYM HERE</td>
-                    <td>NUMBER HERE</td>
+                    <td><?php echo "{$row['id']}";?></td>
+                    <td><?php echo "{$row['title']}";?></td>
+                    <td><?php echo "{$row['org']}";?></td>
+                    <td><?php echo "{$row['date_added']}";?></td>
+                    <td><img src="<?php echo $row['icon'];?>" height="20" width="25"></td>
                 </tr>
                 <?php } ?>
                 
@@ -71,24 +71,27 @@
 </html>
 
 <?php
-        
-        $searchedFor =  $_POST['archivesearchvalue'];
-            
-        // Performing insert query execution
-        // here our table name is college
+    // FIXED: a bug where field would send on every reload
+    // SOLUTION: check if imported (HTTP Posted) var 'is empty'
+    // NOTE: read the fucking manual.
+    if (!empty($_POST['ArchiveSearchValue'])) {
+    
+        $searchedFor =  $_POST['ArchiveSearchValue'];
+
         $sql = "INSERT INTO ypatbltst1  VALUES ('$searchedFor')";
             
-        if(mysqli_query($conn, $sql)){
+        if(mysqli_query($conn, $sql) ){
             echo "<h3>Data stored in a database successfully."
                 . " Please browse your localhost php my admin"
                 . " to view the updated data</h3>";
-    
+
         } else{
             echo "ERROR. "
                 . mysqli_error($conn);
         }
-    
-    ?>
+    }
+
+?>
     
     <?php
         // Close connection
